@@ -1,0 +1,10 @@
+version: 1
+checklist:
+  - repo-created
+  - templates-generated
+  - guides-split
+  - protocols-written
+  - validators-executable
+  - example-added
+  - readme-complete
+  - committed-and-pushed

@@ -1,0 +1,25 @@
+version: 1
+name: agent-creation-checklist
+steps:
+  - id: research
+    required: true
+    checks:
+      - existing-skills-reviewed
+      - capability-gap-confirmed
+  - id: model-selection
+    required: true
+    checks:
+      - domain-fit
+      - cost-latency-tradeoff
+      - escalation-path-defined
+  - id: workspace-bootstrap
+    required: true
+    checks:
+      - core-files-created
+      - validators-pass
+  - id: identity-and-ops
+    required: true
+    checks:
+      - identity-defined
+      - communication-rules-defined
+      - git-workflow-defined

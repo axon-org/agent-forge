@@ -1,7 +1,5 @@
 # TOOLS.md — {{agentName}} Quick Reference
 
-Detailed tool notes in `docs/tool-reference.md`.
-
 | Tool | Path | Quick Command |
 |---|---|---|
 | Mem0 CLI | `~/bin/mem0-memory` | `mem0-memory search "<topic>" --agent {{agentId}}` |
@@ -13,9 +11,9 @@ Detailed tool notes in `docs/tool-reference.md`.
 
 ### Course Knowledge (NeuroBits)
 ```bash
-~/bin/neurobits query "{{agentDomain}} topic"
+~/bin/neurobits query "your domain topic"
 ~/bin/neurobits list                    # Available courses
-~/bin/neurobits concepts <course>       # List concepts in a course
+~/bin/neurobits concepts <course>       # List concepts
 ~/bin/neurobits relate "concept"        # Find related concepts
 ```
 
@@ -25,21 +23,20 @@ Detailed tool notes in `docs/tool-reference.md`.
 ~/bin/mem0-memory add "[insight]" --agent {{agentId}}
 ~/bin/mem0-memory get-all --agent {{agentId}}
 ```
-**Critical:** Always use `--agent {{agentId}}` flag to scope memories to this agent.
+**Critical:** Always use `--agent {{agentId}}` to scope memories.
 
 ### Auto-Ingest Protocol (Agentic RAG)
-When you find a high-quality resource during research:
-```bash
-~/bin/neurobits ingest "<url>" --source "<description>"
-```
+When finding high-quality learning resources:
+1. Download/save to `learning/`
+2. Ingest into NeuroBits: `~/bin/neurobits ingest <file>`
+3. Verify: `~/bin/neurobits query "<topic from resource>"`
 
 ## Knowledge Lookup Order
-1. `expertise/` and `docs/` — local curated knowledge (fastest, most relevant)
-2. Mem0 (`mem0-memory search`) — cross-session learnings
-3. NeuroBits (`~/bin/neurobits query`) — organizational knowledge base
-4. Web search — current external practices (last resort)
+1. **NeuroBits** → `~/bin/neurobits query "[topic]"`
+2. **Mem0** → `~/bin/mem0-memory search "[topic]" --agent {{agentId}}`
+3. **expertise/** → Check patterns and fundamentals
+4. **Internet** → `web_search "[topic]"` (last resort)
 
-## Usage Notes
-- Use only tools relevant to your specialist domain.
-- Prefer repeatable commands and minimal-risk operations.
-- Keep this file short; put long examples in `docs/tool-reference.md`.
+## Web Search Providers
+- **Brave (default):** Fast lookups, structured results
+- **Perplexity (explicit):** Research synthesis, AI-grounded answers (~$0.01/query)

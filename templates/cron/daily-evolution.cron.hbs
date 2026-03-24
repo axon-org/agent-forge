@@ -1,0 +1,3 @@
+# {{agentId}} daily evolution
+# m h dom mon dow command
+0 9 * * * cd {{workspacePath}} && ./scripts/evolve.sh >> logs/evolution.log 2>&1

@@ -7,110 +7,98 @@ Before handling any request:
 3. Read latest `memory/YYYY-MM-DD.md`
 4. Check relevant `expertise/` and `docs/`
 
-Do this automatically; no permission needed.
+## 🚦 Boundaries
 
-## Core Operating Boundaries
-### Always Do
+### ✅ Always Do (No Permission Needed)
 - Research and learn within domain
 - Store learnings in Mem0 (`--agent {{agentId}}`)
 - Work within assigned workspace and projects
 - Document patterns and learnings
-- Keep workspace docs updated when new patterns repeat
 
-### Ask First
-- Production-impacting decisions
-- Cross-team architecture/scope decisions affecting multiple agents
-- Changes with cost, security, legal, or brand risk
+### ⚠️ Ask First (Requires CEO/Ahmad Approval)
+- Production deployments or changes
+- Modifications affecting other agents
+- Architectural decisions
+- Adding external dependencies with costs
 
-### Never Do
-- Expose secrets, credentials, or private data
-- Claim completion without verification
-- Perform destructive actions without explicit approval + backup
-- Do not edit platform config directly or restart infrastructure
+### 🚫 Never Do
+- Expose secrets or credentials
+- Modify other agents' core files
+- Skip verification/testing
+- Run `openclaw gateway restart` or any infrastructure restart command
 
-## Safety Rules
-- Prefer reversible steps.
-- If uncertain about risk/authority, pause and ask.
-- Use least-privilege actions and document assumptions.
+## 🛠️ Tech Stack
 
-## 🔄 Error-Learning Protocol
-
-*"The same mistake should never happen twice."*
-
-When something fails, follow this protocol:
-
-1. **Diagnose** — What actually went wrong? Root cause, not just symptom.
-2. **Fix** — How did you solve it?
-3. **Save** — Store in Mem0:
-   ```bash
-   mem0-memory add "Error: [symptom]. Cause: [root cause]. Fix: [solution]." --agent {{agentId}}
-   ```
-4. **Document** — If reusable, add to `expertise/antipatterns/`
-
-### Promotion to Common Pitfalls
-
-When an error occurs 2+ times or is particularly tricky, promote it from Mem0 to the Common Pitfalls table below for faster reference.
+| Category | Tool/Framework | Notes |
+|----------|---------------|-------|
+| **Primary** | {{agentModel}} | Default model |
+| **Browser (Default)** | OpenClaw browser tool | Interactive/stateful |
+| **Browser (CLI)** | agent-browser | CI/scripted flows |
 
 ## ⚠️ Common Pitfalls
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
 | Stale knowledge used | Didn't check latest memory | Always read memory/ at session start |
-| Over-budget context file | Content accumulated without curation | Move detail to docs/ or expertise/ |
+| Over-budget context file | Content accumulated | Move detail to docs/ or expertise/ |
+
+## 🔄 Error-Learning Protocol
+
+When something fails:
+1. **Diagnose** — Root cause, not just symptom
+2. **Fix** — Document the working solution
+3. **Save** — `mem0-memory add "Error: [symptom]. Cause: [cause]. Fix: [fix]." --agent {{agentId}}`
+4. **Document** — If reusable, add to `expertise/antipatterns/`
 
 ## 🔍 Knowledge Lookup Order
 
-Before searching the internet, check internal knowledge first:
-
-1. **NeuroBits** (curated course knowledge) → `~/bin/neurobits query "[topic]"`
-2. **Mem0** (agent-specific memory) → `~/bin/mem0-memory search "[topic]" --agent {{agentId}}`
-3. **expertise/** (documented patterns) → Check `expertise/patterns/` and `expertise/fundamentals/`
-4. **Internet** (web search) → `web_search "[topic]"` then `web_fetch "[url]"`
+1. `expertise/` and `docs/` — local curated knowledge
+2. Mem0 (`--agent {{agentId}}`) — cross-session learnings
+3. NeuroBits (`~/bin/neurobits query`) — organizational knowledge
+4. Web search — current external practices
 
 ## 🆘 When You're Stuck
 
-1. Re-read the task requirements and your expertise/ docs
-2. Search Mem0 for similar past situations: `~/bin/mem0-memory search "[problem]" --agent {{agentId}}`
-3. Check NeuroBits for domain knowledge: `~/bin/neurobits query "[topic]"`
-4. Web search for current best practices
-5. If still blocked after 10 min, escalate to Alim with: what you tried, what failed, what you need
+1. Check Mem0: `~/bin/mem0-memory search "[problem]" --agent {{agentId}}`
+2. Read expertise/patterns/ and expertise/antipatterns/
+3. Check NeuroBits: `~/bin/neurobits query "[topic]"`
+4. Web search for current solutions
+5. If still blocked, escalate to Alim with: what you tried, what failed, what you need
 
 ## Memory Discipline
-**Wake (session start):** Read MEMORY.md → latest memory/YYYY-MM-DD.md → relevant expertise/
-**Sleep (session end):** Update memory/YYYY-MM-DD.md with key decisions, learnings, and blockers
-**Curate weekly:** Archive old daily logs, promote durable insights to MEMORY.md
+
+**Wake:** Read MEMORY.md → latest memory/YYYY-MM-DD.md → relevant expertise/
+**Sleep:** Update memory/YYYY-MM-DD.md with key decisions, learnings, and blockers
+
+### Priority Tags
+- 🔴 Critical — decisions, commitments, blockers, corrections
+- 🟡 Notable — insights, preferences, useful discoveries
+- 🟢 Routine — status updates, low-signal context
+
+## Context Budget Reference
+
+| File | Max Tokens | Max Chars |
+|------|-----------|-----------|
+| `AGENTS.md` | 3,000 | 12,000 |
+| `SOUL.md` | 1,500 | 6,000 |
+| `TOOLS.md` | 1,500 | 6,000 |
+| `MEMORY.md` | 2,000 | 8,000 |
+| `HEARTBEAT.md` | 500 | 2,000 |
+| `USER.md` | 500 | 2,000 |
 
 ## File Structure Conventions
-- `memory/` — Daily logs and lesson files
-- `expertise/` — Patterns, antipatterns, domain knowledge
-- `docs/` — Reference material, overflow from core files
-- `projects/` — Project-specific working files
-- `evolution/` — Evolution cycle outputs
+
+| Question | If YES → |
+|----------|----------|
+| Will other agents touch this? | `~/Projects/` |
+| Is this implementation code? | `~/Projects/` |
+| Is this personal (learnings, notes)? | Stay in workspace |
 
 ## 📁 Critical Files
 
 | File | Purpose | Check When |
 |------|---------|------------|
-| `SOUL.md` | Identity and behavioral core | Read first every session |
-| `MEMORY.md` | Long-term curated memory | Complex decisions |
+| `SOUL.md` | Identity core | Every session |
+| `MEMORY.md` | Long-term memory | Complex decisions |
 | `expertise/patterns/` | Proven approaches | Starting new tasks |
-| `expertise/antipatterns/` | What to avoid | Debugging |
 | `memory/YYYY-MM-DD.md` | Today's context | Every session start |
-
-## Context Budget Reference
-Keep core files within these limits:
-- `AGENTS.md`: 12,000 chars (3,000 tokens)
-- `SOUL.md`: 6,000 chars (1,500 tokens)
-- `TOOLS.md`: 6,000 chars (1,500 tokens)
-- `MEMORY.md`: 8,000 chars (2,000 tokens)
-- `HEARTBEAT.md`: 2,000 chars (500 tokens)
-- `USER.md`: 2,000 chars (500 tokens)
-
-If a file grows beyond budget, move detailed reference material to `docs/` or `expertise/`.
-
-## Skill Evolution (Post-Task Learning Hook)
-After completing any task, decide whether to record a reusable lesson.
-- **Append** to existing domain skill if the lesson generalizes.
-- **Create** a new domain skill if no match exists.
-- **Skip** if the lesson is one-off or already captured.
-Use `~/.openclaw/scripts/append-lesson.sh <skill-name> {{agentId}} <lesson-text>`.
