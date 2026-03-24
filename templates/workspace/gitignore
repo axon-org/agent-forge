@@ -1,0 +1,21 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit
+.env
+**/*.key
+**/*.pem
+**/secrets*
+
+# OpenClaw internals (these live under ~/.openclaw/, not workspace)
+# If they somehow end up here, ignore them
+auth-profiles.json
+credentials/
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
