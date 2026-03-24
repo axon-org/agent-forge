@@ -1,0 +1,50 @@
+# Post-Creation Checklist
+# Verify all aspects of agent setup after creation.
+
+name: Post-Creation Verification Checklist
+version: "1.0"
+
+sections:
+  - name: "Workspace Setup"
+    items:
+      - "Directory created at ~/.openclaw/workspace-<agent-id>/"
+      - "IDENTITY.md — Name, emoji, role"
+      - "SOUL.md — Full identity and standards"
+      - "AGENTS.md — Operating procedures (includes File Structure section)"
+      - "TOOLS.md — Tool conventions"
+      - "USER.md — Multi-agent context"
+      - "MEMORY.md — Initial structure"
+      - "expertise/ folders created"
+      - "evolution/ folders created"
+
+  - name: "OpenClaw Registration"
+    items:
+      - "Registered in openclaw.json with workspace path"
+      - "Gateway restarted"
+
+  - name: "Inter-Agent Communication (CRITICAL)"
+    items:
+      - "subagents.allowAgents: [\"*\"] added"
+      - "Agent added to tools.agentToAgent.allow"
+      - "org/ symlinked to workspace"
+      - "Agent added to org/DIRECTORY.md"
+      - "Verified agent can spawn to other agents"
+
+  - name: "Code Review Certification (Developer Agents Only)"
+    items:
+      - "Core review skills installed"
+      - "Domain-wisdom module read and patterns stored in Mem0"
+      - "Gauntlet attempted (if applicable)"
+      - "Certification status recorded in AGENT_REGISTRY.md"
+
+  - name: "Evolution & Testing"
+    items:
+      - "Daily evolution cron created"
+      - "Introduction test passed"
+      - "Autonomous learning test passed"
+      - "Mem0 storage verified"
+
+  - name: "Documentation"
+    items:
+      - "Dashboard updated"
+      - "ROADMAP.md updated"

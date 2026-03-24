@@ -1,0 +1,137 @@
+# Master Checklist — NEVER SKIP
+# Print this checklist and check off EVERY item before reporting agent creation complete.
+
+name: Master Agent Creation Checklist
+version: "1.0"
+
+phases:
+  - name: "Phase 0: Research-First (MANDATORY)"
+    items:
+      - Reviewed AGENT_REGISTRY.md — checked all existing agents
+      - Evaluated if existing agent can handle this with skill upgrade
+      - Deep crawled skill sources (ClawdHub, skills.sh, SkillHub)
+      - Searched community (Reddit, Twitter, GitHub) for solutions
+      - Pulled best practices from similar agent implementations
+      - Created Research Summary document
+      - "CEO (Alim) approved proceeding to agent creation"
+
+  - name: "Phase 1: Pre-Creation"
+    items:
+      - Completed Pre-Creation Checklist (name, emoji, ID, domain, reports to)
+      - Ran Scope Check — documented reasoning
+      - Scope Check passed (not overloaded)
+      - CEO approved scope
+
+  - name: "Phase 1.5: Model Selection (MANDATORY)"
+    items:
+      - Analyzed domain requirements (reasoning, code, creative, speed, context)
+      - Reviewed Model Strengths by Domain table
+      - Calculated cost-performance trade-off
+      - Documented Model Selection Recommendation
+      - CEO approved model assignment
+      - Model specified in agent config (or inherits default)
+
+  - name: "Phase 1.6: Browser Automation Setup (if applicable)"
+    items:
+      - "Selected default browser tool for the role"
+      - "If task can't lose progress, enabled checkpoint/recovery workflow"
+      - "Added Browser Automation section to AGENTS.md"
+      - "Tested interruption resilience"
+
+  - name: "Phase 2: Directory Structure"
+    items:
+      - "Created workspace at ~/.openclaw/workspace-<id>/"
+      - "Created all subdirectories (memory, expertise/*, evolution, learning, projects, checkpoints)"
+
+  - name: "Phase 3: Core Files"
+    items:
+      - IDENTITY.md created
+      - "SOUL.md created (includes ACE Cognitive Loop AND Self-Correction section)"
+      - "AGENTS.md created (includes Boundaries, Tech Stack, Pitfalls, When Stuck, File Structure, Error-Learning Protocol, Knowledge Lookup Order)"
+      - "If coding specialist: Added Git Workflow section to AGENTS.md"
+      - "TOOLS.md created using Devi's as template"
+      - "TOOLS.md verified: has Knowledge Systems section (NeuroBits, Mem0 commands)"
+      - "TOOLS.md verified: has Auto-Ingest Protocol for Agentic RAG"
+      - "TOOLS.md verified: has domain-specific tool commands"
+      - "TOOLS.md verified: NeuroBits CLI path is ~/bin/neurobits"
+      - "TOOLS.md verified: Mem0 CLI path is ~/bin/mem0-memory with --agent <agent-id> flag"
+      - "TOOLS.md verified: Knowledge Lookup Order section present"
+      - USER.md created
+      - MEMORY.md created
+      - HEARTBEAT.md created
+
+  - name: "Phase 3.5: Knowledge System Setup (MANDATORY)"
+    items:
+      - "Verified NeuroBits CLI accessible"
+      - "Verified Mem0 CLI accessible"
+      - "Embedded workspace files for semantic search: qmd embed"
+      - "Verified embeddings created: qmd status"
+      - "AGENTS.md includes Knowledge Lookup Order section"
+      - "TOOLS.md includes all mandatory Knowledge Systems sections"
+
+  - name: "Phase 4: Registration"
+    items:
+      - "Added to openclaw.json agents.list (with workspace path)"
+      - "Added to Alim's allowAgents"
+      - "JSON validated: python3 -m json.tool"
+      - "Gateway restarted"
+
+  - name: "Phase 4.5: Discord Bot Identity (MANDATORY)"
+    items:
+      - Created Discord bot application in Developer Portal
+      - Set bot name to agent's name
+      - Uploaded agent's avatar
+      - Copied bot token
+      - Invited bot to server with appropriate permissions
+      - "Added bot account to channels.discord.accounts"
+      - "Created binding in bindings array"
+      - Gateway restarted after config changes
+      - "Verified bot online via openclaw status --deep"
+      - "Tested in Discord — agent responds from their own bot"
+      - Verified bot avatar and name appear correctly
+
+  - name: "Phase 5: Inter-Agent Communication"
+    items:
+      - "subagents.allowAgents: [\"*\"] in agent config"
+      - "Agent added to tools.agentToAgent.allow"
+      - "org/ symlinked to workspace"
+      - "Agent added to org/DIRECTORY.md"
+      - "Reviewed org/CAPABILITIES.md"
+
+  - name: "Phase 6: Evolution Cron"
+    items:
+      - Researched field velocity
+      - "Determined appropriate frequency (daily/3x week/2x week)"
+      - CEO approved frequency
+      - Cron created with correct schedule
+      - "Cron has deliver: false"
+      - Cron follows ACE Cognitive Loop pattern
+
+  - name: "Phase 7: Skills Installation"
+    items:
+      - Identified domain-specific skills from Phase 0 research
+      - Only included skills relevant to agent's domain
+      - Installed skills to agent's workspace
+      - "Verified NO broken symlinks"
+      - Verified skills appear in agent's skills list
+
+  - name: "Phase 8: Testing"
+    items:
+      - Introduction test passed
+      - Autonomous learning test passed
+      - Mem0 storage verified
+      - Agent appears in agents_list
+      - Discord identity verified
+      - TOOLS.md completeness verified
+
+  - name: "Phase 9: Documentation"
+    items:
+      - AGENT_REGISTRY.md updated
+      - Dashboard updated
+      - Playbook updated if new patterns discovered
+      - Learnings stored in Mem0
+
+  - name: "Final Gate"
+    items:
+      - All boxes checked above
+      - Reported completion to CEO with full status

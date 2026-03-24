@@ -1,0 +1,45 @@
+# TOOLS.md — {{agentName}} Quick Reference
+
+Detailed tool notes in `docs/tool-reference.md`.
+
+| Tool | Path | Quick Command |
+|---|---|---|
+| Mem0 CLI | `~/bin/mem0-memory` | `mem0-memory search "<topic>" --agent {{agentId}}` |
+| NeuroBits | `~/bin/neurobits` | `~/bin/neurobits query "<topic>"` |
+| Web Search | `OpenClaw tool: web_search` | `web_search "<query>"` |
+| Browser | `OpenClaw tool: browser` | `browser action=snapshot` |
+
+## Knowledge Systems
+
+### Course Knowledge (NeuroBits)
+```bash
+~/bin/neurobits query "{{agentDomain}} topic"
+~/bin/neurobits list                    # Available courses
+~/bin/neurobits concepts <course>       # List concepts in a course
+~/bin/neurobits relate "concept"        # Find related concepts
+```
+
+### Mem0 (Your Evolution Memory)
+```bash
+~/bin/mem0-memory search "[topic]" --agent {{agentId}}
+~/bin/mem0-memory add "[insight]" --agent {{agentId}}
+~/bin/mem0-memory get-all --agent {{agentId}}
+```
+**Critical:** Always use `--agent {{agentId}}` flag to scope memories to this agent.
+
+### Auto-Ingest Protocol (Agentic RAG)
+When you find a high-quality resource during research:
+```bash
+~/bin/neurobits ingest "<url>" --source "<description>"
+```
+
+## Knowledge Lookup Order
+1. `expertise/` and `docs/` — local curated knowledge (fastest, most relevant)
+2. Mem0 (`mem0-memory search`) — cross-session learnings
+3. NeuroBits (`~/bin/neurobits query`) — organizational knowledge base
+4. Web search — current external practices (last resort)
+
+## Usage Notes
+- Use only tools relevant to your specialist domain.
+- Prefer repeatable commands and minimal-risk operations.
+- Keep this file short; put long examples in `docs/tool-reference.md`.
