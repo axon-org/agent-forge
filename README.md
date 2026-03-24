@@ -1,16 +1,16 @@
 # agent-forge
 
+[![Validate](https://github.com/axon-org/agent-forge/actions/workflows/validate.yml/badge.svg)](https://github.com/axon-org/agent-forge/actions/workflows/validate.yml)
+
 Templates, protocols, and guides for creating OpenClaw specialist agents.
 
-This repo replaces a single monolithic playbook with a modular system you can compose per agent.
-
-## Phase 1 Scope
+## What this includes
 - Workspace file templates (Handlebars)
 - Modular AGENTS sections
-- Protocol docs (creation, model selection, skill assignment)
-- Conceptual guides
+- Protocol docs and guides
 - Validation scripts
 - Example real agent configuration
+- CLI for scaffolding and validation
 
 ## Structure
 
@@ -24,31 +24,69 @@ protocols/     # Decision frameworks
 guides/        # Explanatory docs
 checklists/    # Machine-readable checklists
 examples/      # Real-world example configs
-scripts/       # Utility scripts (workspace scaffold)
+bin/           # CLI entrypoint
+lib/           # CLI command implementation
 ```
 
-## Quick Start
+## Install CLI locally
 
 ```bash
-git clone git@github.com:axon-org/agent-forge.git
+git clone https://github.com/axon-org/agent-forge.git
 cd agent-forge
+npm install
+npm link
+```
 
-# scaffold a workspace
-./scripts/setup-workspace.sh ai-specialist ~/Projects/workspace-ai-specialist
+This makes `agent-forge` available globally on your machine.
 
-# validate core files
+## CLI Usage
+
+### Create a workspace
+
+```bash
+agent-forge create ai-developer \
+  --name "Devi" \
+  --domain "ai/ml systems" \
+  --model "claude-sonnet-4" \
+  --emoji "🧬"
+```
+
+Optional: `--output /path/to/workspace`
+
+### Validate a workspace
+
+```bash
+agent-forge validate ~/.openclaw/workspace-ai-developer
+```
+
+### List available templates
+
+```bash
+agent-forge list-templates
+```
+
+### Run interactive creation checklist
+
+```bash
+agent-forge checklist ai-developer
+```
+
+## Direct script usage
+
+```bash
 ./validators/validate-workspace.sh ~/Projects/workspace-ai-specialist
 ./validators/validate-tools.sh ~/Projects/workspace-ai-specialist/TOOLS.md
 ```
 
 ## Template Variables
 Common Handlebars variables used in `templates/workspace/*.hbs`:
-- `{{agentName}}` / `{{agentDisplayName}}`
+- `{{agentName}}`
 - `{{agentId}}`
-- `{{domain}}`
-- `{{roleTitle}}`
-- `{{primaryStakeholders}}`
+- `{{agentDomain}}`
+- `{{agentModel}}`
+- `{{agentEmoji}}`
+- `{{createdDate}}`
 
 ## Notes
 - Content is distilled from `~/Projects/agent-architecture/PLAYBOOK.md`.
-- Phase 1 intentionally includes docs/templates only (no runtime service code).
+- CLI is plain Node.js (no build step).
