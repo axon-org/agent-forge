@@ -4,6 +4,7 @@ const path = require('node:path');
 const { Command } = require('commander');
 const { createWorkspace } = require('../lib/create');
 const { validateWorkspace } = require('../lib/validate');
+const { renderRegisterConfig } = require('../lib/register');
 const {
   listWorkspaceTemplates,
   listSectionTemplates,
@@ -11,6 +12,7 @@ const {
   sectionsTemplateDir,
 } = require('../lib/templates');
 const { runChecklist } = require('../lib/checklist');
+const { listArchetypes, ARCHETYPES } = require('../lib/archetypes');
 
 const program = new Command();
 
@@ -26,6 +28,10 @@ program
   .requiredOption('--domain <domain>', 'Agent domain, e.g. backend')
   .requiredOption('--model <model>', 'Agent model, e.g. claude-sonnet-4')
   .option('--emoji <emoji>', 'Agent emoji', '🤖')
+  .option(
+    '--archetype <type>',
+    `Append archetype overlays (${Object.keys(ARCHETYPES).join(', ')})`
+  )
   .option('--output <path>', 'Output directory (default: ./<agent-id>)')
   .action((agentId, options) => {
     const output = options.output || `./${agentId}`;
@@ -38,6 +44,34 @@ program
   .action((workspacePath) => {
     const code = validateWorkspace(path.resolve(workspacePath));
     process.exitCode = code;
+  });
+
+program
+  .command('register <agentId>')
+  .description('Emit an OpenClaw config snippet for agent registration')
+  .requiredOption('--model <model>', 'Primary model id, e.g. anthropic/claude-sonnet-4-6')
+  .option('--fallbacks <models>', 'Comma-separated fallback models')
+  .option('--workspace <path>', 'Workspace path (default: ~/.openclaw/workspace-<agent-id>)')
+  .option('--format <format>', 'Output format: json|yaml', 'json')
+  .action((agentId, options) => {
+    try {
+      const rendered = renderRegisterConfig(agentId, options);
+      console.log(rendered);
+    } catch (error) {
+      console.error(`❌ ${error.message}`);
+      process.exitCode = 1;
+    }
+  });
+
+program
+  .command('list-archetypes')
+  .description('List available archetype overlays')
+  .action(() => {
+    const archetypes = listArchetypes();
+    console.log('Available archetypes:');
+    archetypes.forEach((item) => {
+      console.log(`  - ${item.id}: ${item.description}`);
+    });
   });
 
 program

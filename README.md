@@ -6,8 +6,8 @@ Templates, protocols, and guides for creating OpenClaw specialist agents.
 
 ## What this includes
 - Workspace file templates (Handlebars)
+- Archetype overlays (`strategy`, `engineering`, `design`, `operations`)
 - Modular AGENTS sections
-- Protocol docs and guides
 - Validation scripts
 - Example real agent configuration
 - CLI for scaffolding and validation
@@ -16,16 +16,17 @@ Templates, protocols, and guides for creating OpenClaw specialist agents.
 
 ```text
 templates/
-  workspace/   # SOUL/AGENTS/TOOLS/USER/IDENTITY/HEARTBEAT templates
-  sections/    # Optional AGENTS sections
-  cron/        # Evolution cron templates
-validators/    # Workspace/tool validation scripts
-protocols/     # Decision frameworks
-guides/        # Explanatory docs
-checklists/    # Machine-readable checklists
-examples/      # Real-world example configs
-bin/           # CLI entrypoint
-lib/           # CLI command implementation
+  workspace/              # SOUL/AGENTS/TOOLS/USER/IDENTITY/HEARTBEAT templates
+  archetypes/             # Additive overlays by archetype
+  sections/               # Optional AGENTS sections
+  cron/                   # Evolution cron templates
+validators/               # Workspace/tool validation scripts
+protocols/                # Decision frameworks
+guides/                   # Explanatory docs
+checklists/               # Machine-readable checklists
+examples/                 # Real-world example configs
+bin/                      # CLI entrypoint
+lib/                      # CLI command implementation
 ```
 
 ## Install CLI locally
@@ -39,6 +40,30 @@ npm link
 
 This makes `agent-forge` available globally on your machine.
 
+## Quick start (full workflow)
+
+```bash
+# 1) Generate workspace (optionally with archetype overlay)
+agent-forge create venture-strategist \
+  --name "Venture Strategist" \
+  --domain "strategy" \
+  --model "anthropic/claude-sonnet-4-6" \
+  --archetype strategy \
+  --output /tmp/venture-strategist
+
+# 2) Customize generated files (SOUL.md / AGENTS.md / TOOLS.md)
+
+# 3) Validate workspace quality
+agent-forge validate /tmp/venture-strategist
+
+# 4) Generate OpenClaw registration snippet
+agent-forge register venture-strategist \
+  --model anthropic/claude-sonnet-4-6 \
+  --fallbacks "openai/gpt-5.4,google/gemini-3.1-pro"
+
+# 5) Add snippet to openclaw.json + add id to main.subagents.allowAgents
+```
+
 ## CLI Usage
 
 ### Create a workspace
@@ -48,16 +73,52 @@ agent-forge create ai-developer \
   --name "Devi" \
   --domain "ai/ml systems" \
   --model "claude-sonnet-4" \
-  --emoji "🧬"
+  --emoji "🧬" \
+  --archetype engineering
 ```
 
-Optional: `--output /path/to/workspace`
+Options:
+- `--output /path/to/workspace` (default `./<agent-id>`)
+- `--archetype <type>` (additive overlays)
+
+### List available archetypes
+
+```bash
+agent-forge list-archetypes
+```
 
 ### Validate a workspace
 
 ```bash
 agent-forge validate ~/.openclaw/workspace-ai-developer
 ```
+
+Validation checks include:
+- required files exist and are non-empty
+- no leftover `{{...}}` placeholders
+- minimum file sizes (`SOUL.md > 500 bytes`, `AGENTS.md > 300 bytes`)
+- non-empty Domain Expertise section in `SOUL.md`
+- filled-in agent name in `IDENTITY.md`
+
+### Generate registration config snippet
+
+```bash
+# JSON (default)
+agent-forge register venture-strategist \
+  --model anthropic/claude-sonnet-4-6 \
+  --fallbacks "openai/gpt-5.4,google/gemini-3.1-pro"
+
+# YAML
+agent-forge register venture-strategist \
+  --model anthropic/claude-sonnet-4-6 \
+  --format yaml
+```
+
+Options:
+- `--workspace <path>` default `~/.openclaw/workspace-<agent-id>`
+- `--model <model>` primary model
+- `--fallbacks <m1,m2,...>` comma-separated fallback models
+- `--format json|yaml`
 
 ### List available templates
 
@@ -70,6 +131,13 @@ agent-forge list-templates
 ```bash
 agent-forge checklist ai-developer
 ```
+
+## Post-create workflow summary
+
+After `agent-forge create`, the CLI prints:
+1. workspace location
+2. files needing customization (`SOUL.md`, `AGENTS.md`, `TOOLS.md`)
+3. next-step commands for copying workspace, creating agent dir, generating config, and validating
 
 ## Direct script usage
 
