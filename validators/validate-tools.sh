@@ -38,12 +38,27 @@ while IFS= read -r cmd; do
   fi
 
   if [[ "$bin" == */* ]]; then
-    [[ -x "$bin" || -f "$bin" ]] && echo "✅ $bin" || { echo "❌ Missing path: $bin"; fail=1; }
+    if [[ -x "$bin" || -f "$bin" ]]; then
+      echo "✅ $bin"
+    else
+      echo "❌ Missing path: $bin"
+      fail=1
+    fi
   else
-    command -v "$bin" >/dev/null 2>&1 && echo "✅ $bin" || { echo "❌ Missing command: $bin"; fail=1; }
+    if command -v "$bin" >/dev/null 2>&1; then
+      echo "✅ $bin"
+    else
+      echo "❌ Missing command: $bin"
+      fail=1
+    fi
   fi
 done <<EOF_CMDS
 $commands
 EOF_CMDS
 
-[[ $fail -eq 0 ]] && echo "Tool validation passed." || { echo "Tool validation failed."; exit 1; }
+if [[ $fail -eq 0 ]]; then
+  echo "Tool validation passed."
+else
+  echo "Tool validation failed."
+  exit 1
+fi
