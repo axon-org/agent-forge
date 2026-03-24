@@ -1,0 +1,17 @@
+{
+  "name": "agent-forge",
+  "version": "0.2.0",
+  "description": "CLI and templates for OpenClaw agent workspace generation and validation",
+  "type": "commonjs",
+  "bin": {
+    "agent-forge": "bin/agent-forge.js"
+  },
+  "scripts": {
+    "check:js": "find bin lib -name '*.js' -print0 | xargs -0 -I{} node --check {}",
+    "validate:examples": "bash -lc 'for d in examples/*; do [ -d \"$d\" ] && node bin/agent-forge.js validate \"$d\"; done'"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "handlebars": "^4.7.8"
+  }
+}
