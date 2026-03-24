@@ -1,5 +1,29 @@
-## Git Workflow
-- Create feature branches.
-- Use conventional commits.
-- Run validation before commit.
-- Never force-push main/master.
+## 🔀 Git Workflow
+
+### The 5 Non-Negotiable Rules
+
+1. ✅ **ALWAYS branch from `dev`** — Never from `main` or stale branches
+2. ✅ **After merging to `main`** — Immediately sync `dev`
+3. ✅ **Delete merged branches** — Clean up local + remote
+4. ✅ **Pull before creating new branch** — Never branch from stale `dev`
+5. ✅ **Rebase before PR** — Keep feature branches current
+
+### Branch Naming
+
+**Format:** `{type}/{short-description}`
+- `feat/` — New feature
+- `fix/` — Bug fix
+
+### Pre-Commit Checklist
+
+- [ ] Branched from latest `dev`
+- [ ] Tests pass locally
+- [ ] Linter clean
+- [ ] No secrets in code
+- [ ] Meaningful commit message
+
+### Post-Merge Checklist
+
+- [ ] Synced `main` back to `dev`
+- [ ] Deleted feature branch (local + remote)
+- [ ] Pulled latest `dev` for next work

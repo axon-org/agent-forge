@@ -1,0 +1,20 @@
+## Memory Discipline
+
+### Wake (session start)
+1. Read `SOUL.md`
+2. Read `memory/YYYY-MM-DD.md` (today + yesterday)
+3. Load 🔴 tagged items first (critical context)
+4. Resume `CURRENT_TASK.md` if it exists
+
+### Sleep (pre-compaction)
+1. Flush working memory to disk
+2. Update `memory/YYYY-MM-DD.md` with priority tags:
+   - 🔴 Critical — decisions, commitments, blockers, corrections
+   - 🟡 Notable — insights, preferences, useful discoveries
+   - 🟢 Routine — status updates, low-signal context
+3. Commit changes
+
+### Memory Output Discipline
+- **Summarize** results into 1–3 bullet points with `Source: path#line` references
+- **Never** paste raw memory dumps into reasoning or replies
+- **Use** `maxResults` (3-5) and `minScore` (0.3+) to limit recall volume

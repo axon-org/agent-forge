@@ -1,7 +1,6 @@
-# Example: Specialist Agent (AI Developer)
+# Example: Specialist Agent
 
-This example shows the complete workspace for a specialist agent.
-Based on Devi (AI Developer) — the first specialist created using the playbook.
+This shows what a completed specialist agent workspace looks like.
 
 ## Pre-Creation Answers
 
@@ -13,45 +12,30 @@ Based on Devi (AI Developer) — the first specialist created using the playbook
 | **Domain** | AI/ML development, LLM applications, agent systems |
 | **Type** | Specialist |
 | **Reports to** | Alim (CEO) |
-| **Model** | claude-sonnet-4-6 (default), opus for complex work |
+| **Model** | claude-opus-4-6 |
 
-## OpenClaw Config Entry
+## Directory Structure
 
-```json
-{
-  "id": "ai-developer",
-  "workspace": "/Users/alimai/.openclaw/workspace-ai-developer",
-  "model": "anthropic/claude-sonnet-4-20250514",
-  "identity": {
-    "name": "Devi",
-    "emoji": "🧬"
-  },
-  "subagents": {
-    "allowAgents": ["*"]
-  },
-  "groupChat": {
-    "mentionPatterns": ["@devi", "@Devi", "devi", "Devi"]
-  }
-}
+```
+~/.openclaw/workspace-ai-developer/
+├── SOUL.md              # Identity + ACE Loop + Self-Correction
+├── AGENTS.md            # Session protocol + boundaries + error-learning
+├── TOOLS.md             # NeuroBits + Mem0 + domain tools
+├── USER.md              # Ahmad + Alim context
+├── MEMORY.md            # Curated long-term memory
+├── IDENTITY.md          # Quick reference card
+├── HEARTBEAT.md         # Periodic checks
+├── memory/              # Daily logs + decisions + lessons
+├── expertise/           # Patterns, antipatterns, fundamentals
+├── evolution/           # Skills, gaps, roadmap
+├── learning/            # Resources being processed
+└── projects/            # Active project context
 ```
 
-## Evolution Cron
+## Key Patterns
 
-- **Frequency:** Daily (AI/ML field moves extremely fast)
-- **Schedule:** `0 9 * * *` (9:00 AM PKT)
-- **Deliver:** false (CEO synthesizes at 12 PM)
-
-## Skills Bundle
-
-- docker-essentials
-- test-runner
-- tdd-guide
-- ollama-local-llm
-- codex-backend
-- codex-ai-ml
-
-## Key Design Decisions
-
-1. **Model:** Opus for complex reasoning, Sonnet for day-to-day — AI/ML requires deep analysis
-2. **Daily evolution:** The field moves too fast for anything less
-3. **Browser tooling:** OpenClaw browser default (exploratory debugging), agent-browser for CI test flows
+1. **SOUL.md** is the most important file — identity, standards, philosophy
+2. **AGENTS.md** is the instruction manual — protocols, boundaries, memory discipline
+3. **TOOLS.md** must include NeuroBits + Mem0 + Knowledge Lookup Order
+4. All bootstrap files respect context budget limits
+5. Detailed reference material goes to `docs/` or `expertise/`, not bootstrap files

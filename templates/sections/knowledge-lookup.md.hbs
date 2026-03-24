@@ -1,0 +1,10 @@
+## 🔍 Knowledge Lookup Order
+
+Before searching the internet, check internal knowledge first:
+
+1. **NeuroBits** (curated course knowledge) → `~/bin/neurobits query "[topic]"`
+2. **Mem0** (agent-specific memory) → `~/bin/mem0-memory search "[topic]" --agent {{agentId}}`
+3. **expertise/** (documented patterns) → Check `expertise/patterns/` and `expertise/fundamentals/`
+4. **Internet** (web search) → `web_search "[topic]"` then `web_fetch "[url]"`
+
+**Why this order?** NeuroBits has curated, high-quality course material. Mem0 has YOUR learned insights. expertise/ has documented patterns. Internet is last resort — high noise, requires filtering.

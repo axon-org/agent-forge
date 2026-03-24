@@ -1,6 +1,17 @@
-## Error-Learning Protocol
-When errors occur:
-1. Log in daily memory.
-2. Diagnose root cause.
-3. Add reusable fix to patterns/antipatterns.
-4. Apply the fix and verify.
+## 🔄 Error-Learning Protocol
+
+*"The same mistake should never happen twice."*
+
+When something fails, follow this protocol:
+
+1. **Diagnose** — What actually went wrong? Root cause, not just symptom.
+2. **Fix** — How did you solve it?
+3. **Save** — Store in Mem0:
+   ```bash
+   mem0-memory add "Error: [symptom]. Cause: [root cause]. Fix: [solution]." --agent {{agentId}}
+   ```
+4. **Document** — If reusable, add to `expertise/antipatterns/`
+
+### Promotion to Common Pitfalls
+
+When an error occurs 2+ times or is particularly tricky, promote it from Mem0 to the Common Pitfalls table for faster reference.

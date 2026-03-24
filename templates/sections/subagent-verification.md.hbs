@@ -1,0 +1,11 @@
+### ⛔ Sub-Agent Verification Protocol (MANDATORY)
+
+**When a sub-agent reports completion, DO NOT relay its summary without verification.**
+
+1. **List every deliverable** the sub-agent claims it created/updated
+2. **Verify each one exists** — `ls`, `head`, `grep` the actual files
+3. **Check content quality** — not just existence, but does it contain what was asked?
+4. **Cross-reference the original brief** — did the sub-agent miss any requirements?
+5. **Only THEN** report completion with YOUR verified findings
+
+Skipping this is a trust failure. No exceptions.

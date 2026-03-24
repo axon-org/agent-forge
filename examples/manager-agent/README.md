@@ -1,7 +1,6 @@
-# Example: Manager Agent (CEO — Alim)
+# Example: Manager Agent
 
-This example shows the configuration for a manager/orchestrator agent.
-Based on Alim (CEO) — the organization's primary manager.
+Manager agents orchestrate specialists and synthesize reports.
 
 ## Pre-Creation Answers
 
@@ -10,70 +9,22 @@ Based on Alim (CEO) — the organization's primary manager.
 | **Name** | Alim |
 | **Emoji** | 🦞 |
 | **Agent ID** | main |
-| **Domain** | Organization management, strategic synthesis, delegation |
+| **Domain** | CEO — orchestration, strategy, synthesis |
 | **Type** | Manager |
 | **Reports to** | Ahmad (Human) |
-| **Model** | claude-opus-4-6 (strategic decisions need highest quality) |
+| **Model** | claude-opus-4-6 |
 
 ## Key Differences from Specialists
 
-| Aspect | Specialist | Manager |
-|--------|-----------|---------|
-| **Primary job** | Deep domain expertise | Delegation + synthesis |
-| **Evolution** | Learn own domain daily | Synthesize specialist learnings |
-| **Notifications** | Silent (deliver: false) | Reports to human |
-| **Model** | Usually Sonnet (cost-effective) | Usually Opus (complex orchestration) |
-| **Skills** | Domain-specific | Cross-cutting organization skills |
+1. **Broader scope** — orchestrates across domains, doesn't deep-dive
+2. **Sub-agent spawning** — delegates to specialists via `sessions_spawn`
+3. **Synthesis focus** — combines specialist outputs into coherent strategy
+4. **Higher model tier** — needs complex reasoning for cross-domain decisions
+5. **Sub-Agent Verification Protocol** — MUST verify sub-agent deliverables before relaying
 
-## OpenClaw Config Entry
+## Manager-Specific AGENTS.md Sections
 
-```json
-{
-  "id": "main",
-  "workspace": "/Users/alimai/clawd",
-  "model": "anthropic/claude-opus-4-20250514",
-  "identity": {
-    "name": "Alim",
-    "emoji": "🦞"
-  },
-  "subagents": {
-    "allowAgents": ["*"]
-  }
-}
-```
-
-## Manager-Specific Patterns
-
-### Daily Synthesis (12 PM)
-```
-For each specialist:
-  1. Query their Mem0 for recent learnings
-  2. Read their daily memory logs
-  3. Identify strategic implications
-  4. Compose ONE consolidated message to Ahmad
-```
-
-### Delegation Pattern
-```
-Receive request from human
-  → Identify best specialist
-  → sessions_spawn({ agentId: "specialist", task: "..." })
-  → Monitor completion
-  → Verify deliverables
-  → Report to human
-```
-
-### Sub-Agent Verification (MANDATORY)
-When a sub-agent reports completion:
-1. List every deliverable claimed
-2. Verify each exists (ls, head, grep)
-3. Check content quality
-4. Cross-reference original brief
-5. Only then report completion
-
-## Key Design Decisions
-
-1. **Model:** Opus required — CEO makes org-wide strategic decisions
-2. **No evolution cron for learning** — CEO synthesizes, doesn't learn domain-specific skills
-3. **Has synthesis cron** at 12 PM PKT to aggregate specialist work
-4. **Workspace at ~/clawd** — legacy path, all new agents use ~/.openclaw/workspace-<id>/
+- Sub-Agent Verification Protocol (mandatory)
+- Dynamic Model Routing guidance
+- Delegation patterns and specialist directory
+- Synthesis and reporting templates

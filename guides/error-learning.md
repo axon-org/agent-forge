@@ -2,8 +2,6 @@
 
 *"The same mistake should never happen twice."*
 
-When something fails, agents follow this protocol to capture the fix permanently.
-
 ## The Loop
 
 ```
@@ -29,23 +27,6 @@ Error Occurs → Diagnose → Fix → Save → Never Repeat
 4. **Document** — If it's a reusable pattern
    - Add to `expertise/antipatterns/[topic].md`
    - Include: symptom, cause, fix, prevention
-
-## Example
-
-```markdown
-## Error: Gateway restart failed after config edit
-
-**Symptom:** `openclaw gateway restart` hangs indefinitely
-
-**Cause:** Invalid JSON in openclaw.json (trailing comma)
-
-**Fix:** Validate JSON before restart:
-```bash
-cat ~/.openclaw/openclaw.json | python3 -m json.tool
-```
-
-**Prevention:** Always validate config syntax before restart
-```
 
 ## Integration with Common Pitfalls
 

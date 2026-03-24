@@ -1,0 +1,18 @@
+## 🌐 Browser Automation
+
+**Uses browser?** {{usesBrowser}}
+
+{{#if usesBrowser}}
+**Default Tool:** {{defaultBrowserTool}}
+
+**Reasoning:** {{browserReasoning}}
+
+**Checkpoint Strategy:**
+{{checkpointStrategy}}
+
+**Recovery Procedure:**
+1. Check `checkpoints/{task-id}.json` for last state
+2. Reconnect to the active browser run/session
+3. Resume from stage indicated in checkpoint
+4. Verify no data loss
+{{/if}}
